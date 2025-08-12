@@ -1,0 +1,20 @@
+
+# Quick Upload & Deploy Instructions
+
+1. Go to your GitHub repository.
+2. Click "Add file" → "Upload files".
+3. Unzip this folder on your computer.
+4. Drag ALL files and folders from inside this unzipped folder into the GitHub upload page.
+   (You should see: app.py, requirements.txt, render.yaml, templates/, static/, README.md, etc.)
+5. Commit changes.
+
+# Deploy to Render
+1. Go to https://render.com and sign in with GitHub.
+2. Click "New +" → "Web Service".
+3. Select your GitHub repo.
+4. Choose the Free plan.
+5. In Environment Variables, add:
+   - Key: OPENAI_API_KEY
+   - Value: your OpenAI API key (starts with sk-...)
+6. Click "Deploy".
+7. After 2–3 minutes, you will get a public link to your app.

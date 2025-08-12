@@ -1,0 +1,7 @@
+
+flask
+openai
+docx2txt
+pdfplumber
+pandas
+xlsxwriter

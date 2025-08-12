@@ -1,0 +1,58 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dynamic JD ↔ CV Matcher</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f4f7fb; color: #111; }
+    .container { max-width: 980px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 8px 24px rgba(12,20,40,0.08); }
+    h1 { margin-top: 0; }
+    label { display:block; margin-top: 12px; font-weight:600; }
+    input[type=file] { margin-top:6px; }
+    select, button { margin-top:12px; padding:8px 12px; border-radius:6px; }
+    button { background:#0b5cff; color:white; border:0; cursor:pointer; }
+    button[disabled]{opacity:0.6; cursor:not-allowed}
+    #results { margin-top:20px; }
+    table { width:100%; border-collapse:collapse; margin-top:10px; }
+    th, td { padding:8px 6px; text-align:left; border-bottom:1px solid #eef3fb; }
+    .heatcell { padding:6px 8px; border-radius:4px; color:white; display:inline-block; min-width:70px; text-align:center; }
+    .full { background:#16a34a; } /* green */
+    .partial { background:#f59e0b; } /* amber */
+    .gap { background:#ef4444; } /* red */
+    pre { background:#0f172a; color:#e6eef9; padding:12px; border-radius:6px; overflow:auto; }
+    .weights { margin-top:8px; padding:10px; background:#f8fafc; border-radius:6px; font-size:14px; }
+    .flex { display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Dynamic JD ↔ CV Matcher (Prototype)</h1>
+    <p>Upload a Job Description and up to <strong>10 CVs</strong>. The app extracts competencies from the JD and scores the CVs.</p>
+    <form id="uploadForm">
+      <label>Job Description (JD)</label>
+      <input type="file" id="jd" name="jd" accept=".docx,.pdf,.txt" required>
+      <label>Candidate CVs (max 10)</label>
+      <input type="file" id="cvs" name="cvs" accept=".docx,.pdf,.txt" multiple required>
+      <div class="flex">
+        <div>
+          <label>Model</label>
+          <select id="model" name="model">
+            <option value="gpt-3.5-turbo">GPT-3.5 Turbo (default, cheap)</option>
+            <option value="gpt-4-turbo">GPT-4 Turbo (balanced)</option>
+            <option value="gpt-4o">GPT-4o (fast, high-quality)</option>
+          </select>
+        </div>
+        <div style="margin-left:auto">
+          <button type="submit" id="submitBtn">Generate Heatmap</button>
+          <button type="button" id="exportBtn" style="background:#0b8f5a; margin-left:8px;" disabled>Export to Excel</button>
+        </div>
+      </div>
+      <div style="margin-top:8px; font-size:13px; color:#555">Note: Files are sent to the server and then to OpenAI. Do not upload sensitive data without consent.</div>
+    </form>
+    <div id="results"></div>
+  </div>
+  <script src="/static/script.js"></script>
+</body>
+</html>
