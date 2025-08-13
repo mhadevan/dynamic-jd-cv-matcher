@@ -1,6 +1,6 @@
 
 flask
-openai==0.28
+openai
 docx2txt
 pdfplumber
 pandas
